@@ -33,12 +33,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }} 
-
+          tags: ghcr.io/stteenarts/deployci-cd:latest
+          
       - name: Build and push Docker image
         run: |
           # Construir la imagen Docker usando el Dockerfile
           docker build -f Dockerfile -t ghcr.io/${{ github.repository }}:latest .
-          tags: ghcr.io/stteenarts/deployci-cd:latest
           
           # Subir la imagen construida a GHCR
           docker push ghcr.io/${{ github.repository }}:latest

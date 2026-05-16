@@ -38,10 +38,10 @@ jobs:
       - name: Build and push Docker image
         run: |
           # Construir la imagen Docker usando el Dockerfile
-          docker build -f Dockerfile -t ghcr.io/${{ github.repository }}:latest .
+          docker build -f Dockerfile -t ghcr.io/stteenarts/deployci-cd:latest .
           
           # Subir la imagen construida a GHCR
-          docker push ghcr.io/${{ github.repository }}:latest
+          docker push ghcr.io/stteenarts/deployci-cd:latest
     
   deploy:
     needs: build-and-push
@@ -59,7 +59,7 @@ jobs:
             echo "Conexión exitosa al VPS"
 
             docker login ghcr.io -u "andrescortesdev" -p ${{ secrets.TOKEN}} 
-            docker pull ghcr.io/${{ github.repository }}:latest
+            docker pull ghcr.io/stteenarts/deployci-cd:latest
             docker stop ${{github.event.repository.name}} || true
             docker rm ${{github.event.repository.name}} || true
 

@@ -38,10 +38,11 @@ jobs:
         run: |
           # Construir la imagen Docker usando el Dockerfile
           docker build -f Dockerfile -t ghcr.io/${{ github.repository }}:latest .
-
+          tags: ghcr.io/stteenarts/deployci-cd:latest
+          
           # Subir la imagen construida a GHCR
           docker push ghcr.io/${{ github.repository }}:latest
-
+    
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
